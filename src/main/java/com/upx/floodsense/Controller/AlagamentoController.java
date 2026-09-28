@@ -6,10 +6,7 @@ import com.upx.floodsense.Service.AlagamentoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -37,6 +34,12 @@ public class AlagamentoController {
     public ResponseEntity<List<Alagamento>> getAlagamentosHistorico(){
         List<Alagamento> listAlagamentosHistorico = alagamentoService.getAlagamentosHistory();
         return ResponseEntity.status(HttpStatus.OK).body(listAlagamentosHistorico);
+    }
+
+    @PostMapping("/new_alagamento")
+    public ResponseEntity<Alagamento> newAlagamento(@RequestBody CreateAlagamentoDTO createAlagamentoDTO){
+        var newAlagamento = alagamentoService.createAlagamento(createAlagamentoDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(newAlagamento);
     }
 
 }
