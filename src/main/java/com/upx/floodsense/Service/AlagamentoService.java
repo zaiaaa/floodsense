@@ -38,4 +38,12 @@ public class AlagamentoService {
 
     }
 
+    public Alagamento resetAlagamento(Long id, CreateAlagamentoDTO createAlagamentoDTO){
+        var entity = alagamentoRepository.findById(id).orElseThrow();
+        entity.setStatus(createAlagamentoDTO.status());
+        entity.setFim(Timestamp.from(Instant.now()));
+
+        return alagamentoRepository.save(entity);
+    }
+
 }
