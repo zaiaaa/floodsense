@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.time.Instant;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -38,9 +37,16 @@ public class AlagamentoService {
 
     }
 
-    public Alagamento resetAlagamento(Long id, CreateAlagamentoDTO createAlagamentoDTO){
-        var entity = alagamentoRepository.findById(id).orElseThrow();
-        entity.setStatus(createAlagamentoDTO.status());
+    public Alagamento resetAlagamento(String fkCodigoBueiro){
+        var lastActiveFlood = alagamentoRepository.findFirstByfkCodigoDispositivoAndStatusOrderByInicioDesc(fkCodigoBueiro, "ATIVO");
+        if (lastActiveFlood.isEmpty()) {
+            return null;
+        }
+
+        var entity = alagamentoRepository.findById(lastActiveFlood.get().getId()).orElseThrow();
+
+
+        entity.setStatus("INATIVO");
         entity.setFim(Timestamp.from(Instant.now()));
 
         return alagamentoRepository.save(entity);

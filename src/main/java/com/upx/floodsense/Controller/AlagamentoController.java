@@ -42,10 +42,10 @@ public class AlagamentoController {
         return ResponseEntity.status(HttpStatus.CREATED).body(newAlagamento);
     }
 
-    @PostMapping("/reset_alagamento/{id}")
-    public ResponseEntity<Alagamento> resetAlagamento(@PathVariable Long id, @RequestBody CreateAlagamentoDTO createAlagamentoDTO){
-        var resetAlagamento = alagamentoService.resetAlagamento(id, createAlagamentoDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body(resetAlagamento);
+    @PostMapping("/reset_alagamento/{fkCodigoBueiro}")
+    public ResponseEntity<String> resetAlagamento(@PathVariable String fkCodigoBueiro){
+        var resetAlagamento = alagamentoService.resetAlagamento(fkCodigoBueiro);
+        return ResponseEntity.status(HttpStatus.CREATED).body(fkCodigoBueiro);
     }
 
 }
