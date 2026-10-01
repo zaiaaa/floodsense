@@ -45,6 +45,11 @@ public class AlagamentoController {
     @PostMapping("/reset_alagamento/{fkCodigoBueiro}")
     public ResponseEntity<String> resetAlagamento(@PathVariable String fkCodigoBueiro){
         var resetAlagamento = alagamentoService.resetAlagamento(fkCodigoBueiro);
+
+        if (resetAlagamento == null) {
+            return ResponseEntity.noContent().build();
+        }
+
         return ResponseEntity.status(HttpStatus.CREATED).body(fkCodigoBueiro);
     }
 
