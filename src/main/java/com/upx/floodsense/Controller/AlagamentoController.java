@@ -25,8 +25,8 @@ public class AlagamentoController {
     }
 
     @GetMapping("/alagamentos_ativos")
-    public ResponseEntity<List<Alagamento>> getAlagamentosAtivos(){
-        List<Alagamento> listAlagamentosAtivos = alagamentoService.getAlagamentosAtivos();
+    public ResponseEntity<List<AlagamentoResponseDTO>> getAlagamentosAtivos(){
+        List<AlagamentoResponseDTO> listAlagamentosAtivos = alagamentoService.getAlagamentosAtivos();
         return ResponseEntity.status(HttpStatus.OK).body(listAlagamentosAtivos);
     }
 

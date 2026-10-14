@@ -10,11 +10,9 @@ import java.sql.Timestamp;
 public class Alagamento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     @Column(name="id")
     private long id;
-
-    @Column(name = "fk_codigo_dispositivo")
-    private String fkCodigoDispositivo;
 
     @Column(name = "inicio")
     private Timestamp inicio;
@@ -25,20 +23,16 @@ public class Alagamento {
     @Column(name="status")
     private String status;
 
+    @ManyToOne
+    @JoinColumn(name = "fk_codigo_dispositivo")
+    private Bueiro bueiro;
+
     public long getId() {
         return id;
     }
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public String getFkCodigoDispositivo() {
-        return fkCodigoDispositivo;
-    }
-
-    public void setFkCodigoDispositivo(String fkCodigoDispositivo) {
-        this.fkCodigoDispositivo = fkCodigoDispositivo;
     }
 
     public Timestamp getInicio() {
@@ -63,5 +57,13 @@ public class Alagamento {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Bueiro getBueiro() {
+        return bueiro;
+    }
+
+    public void setBueiro(Bueiro bueiro) {
+        this.bueiro = bueiro;
     }
 }

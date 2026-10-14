@@ -11,8 +11,8 @@ public interface AlagamentoRepository extends JpaRepository<Alagamento, Long> {
     List<Alagamento> findByStatus(String status);
     List<Alagamento> findAllByOrderByInicioDesc();
 
-    Optional<Alagamento> findFirstByfkCodigoDispositivoAndStatusOrderByInicioDesc(
-            String fkCodigoDispositivo,
+    Optional<Alagamento> findFirstByBueiro_CodigoDispositivoAndStatusOrderByInicioDesc(
+            String codigoDispositivo,
             String status
     );
 
